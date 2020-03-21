@@ -5,13 +5,13 @@ Based heavily on the work done by [LunarNightShade](https://github.com/LunarNigh
 ## Usage
 ```
 docker run -d -it --rm \
-	--name XMage \
-	-p 17171:17171 \
-	-p 17179:17179 \
-	--add-host example.com:0.0.0.0 \
-	-e "XMAGE_DOCKER_SERVER_ADDRESS=example.com" \
-	--restart unless-stopped \
-	resech/docker-xmage-adoptopenjdk
+    --name XMage \
+    -p 17171:17171 \
+    -p 17179:17179 \
+    --add-host example.com:0.0.0.0 \
+    -e "XMAGE_DOCKER_SERVER_ADDRESS=example.com" \
+    --restart unless-stopped \
+    resech/docker-xmage-adoptopenjdk
 ```
 
 XMage needs to know the domain name the server is running on. The `--add-host` option adds an entry to the containers `/etc/hosts` file for this domain. Replace `example.com` with your server IP address or domain name address.  
