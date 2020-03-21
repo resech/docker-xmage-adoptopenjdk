@@ -11,7 +11,7 @@ docker run -d -it --rm \
 	--add-host example.com:0.0.0.0 \
 	-e "XMAGE_DOCKER_SERVER_ADDRESS=example.com" \
 	--restart unless-stopped \
-	resech/adoptopenjdk-xmage
+	resech/docker-xmage-adoptopenjdk
 ```
 
 XMage needs to know the domain name the server is running on. The `--add-host` option adds an entry to the containers `/etc/hosts` file for this domain. Replace `example.com` with your server IP address or domain name address.  
@@ -76,5 +76,5 @@ docker run -d -it --rm \
     -e "XMAGE_DOCKER_SERVER_MSG=resech's XMage Server" \
 	-e "XMAGE_DOCKER_MADBOT_ENABLED=1" \
     --mount source=xmage-db,target=/xmage/mage-server/db \
-	resech/adoptopenjdk-xmage
+	resech/docker-xmage-adoptopenjdk
 ```
