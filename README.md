@@ -64,17 +64,17 @@ You should **ALWAYS** change the admin password, you can do that with the `XMAGE
 So an advanced Docker Run Configuration with the G1 Garbage Collector and AI enabled would look like this:
 ```
 docker run -d -it --rm \
-	--name XMage \
-	-p 17171:17171 \
-	-p 17179:17179 \
+    --name XMage \
+    -p 17171:17171 \
+    -p 17179:17179 \
     --add-host example.com:0.0.0.0 \
-	-e "XMAGE_DOCKER_SERVER_ADDRESS=example.com" \
+    -e "XMAGE_DOCKER_SERVER_ADDRESS=example.com" \
     -e 'XMAGE_DOCKER_ADMIN_PASSWORD=My$up3rS3cR3+P@$$W0rD' \
     -e "JAVA_MIN_MEMORY=256M" \
     -e "JAVA_MAX_MEMORY=2G" \
     -e "JAVA_EXTENDED_OPTIONS=-XX:+UseG1GC -XX:+UseStringDeduplication -XX:G1HeapRegionSize=1m" \
     -e "XMAGE_DOCKER_SERVER_MSG=resech's XMage Server" \
-	-e "XMAGE_DOCKER_MADBOT_ENABLED=1" \
+    -e "XMAGE_DOCKER_MADBOT_ENABLED=1" \
     --mount source=xmage-db,target=/xmage/mage-server/db \
-	resech/docker-xmage-adoptopenjdk
+    resech/docker-xmage-adoptopenjdk
 ```
