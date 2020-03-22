@@ -4,7 +4,7 @@ FROM adoptopenjdk/openjdk8:jre8u-alpine-nightly
 # Build and config ENVs
 
 ENV JAVA_MIN_MEMORY=256M \
-	JAVA_MAX_MEMORY=2G \
+    JAVA_MAX_MEMORY=2G \
     JAVA_EXTENDED_OPTIONS="-XX:MaxPermSize=256m" \
     LANG='en_US.UTF-8' \
     LANGUAGE='en_US:en' \
