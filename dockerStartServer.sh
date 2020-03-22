@@ -23,7 +23,7 @@ if [ "$XMAGE_DOCKER_MADBOT_ENABLED" -eq "0" ]; then
 fi
 
 # Customise Server Messages
-echo -n "$XMAGE_DOCKER_SERVER_MSG" > ${XMAGE_SERVERMSG}
+echo -en "$XMAGE_DOCKER_SERVER_MSG" > ${XMAGE_SERVERMSG}
 
 # Custom Java Launch
 java -Xms$JAVA_MIN_MEMORY -Xmx$JAVA_MAX_MEMORY $JAVA_EXTENDED_OPTIONS -Djava.security.policy=./config/security.policy -Djava.util.logging.config.file=./config/logging.config -Dlog4j.configuration=file:./config/log4j.properties -jar ./lib/mage-server-*.jar -adminPassword=$XMAGE_DOCKER_ADMIN_PASSWORD
