@@ -15,29 +15,27 @@ ENV JAVA_MIN_MEMORY=256M \
     XMAGE_DOCKER_MAX_SECONDS_IDLE="600" \
     XMAGE_DOCKER_AUTHENTICATION_ACTIVATED="false" \
     XMAGE_DOCKER_SERVER_NAME="My XMage Server" \
-	XMAGE_DOCKER_ADMIN_PASSWORD="hunter2" \
-	XMAGE_DOCKER_MAX_GAME_THREADS="10" \
-	XMAGE_DOCKER_MIN_USERNAME_LENGTH="3" \
-	XMAGE_DOCKER_MAX_USERNAME_LENGTH="14" \
-	XMAGE_DOCKER_MIN_PASSWORD_LENGTH="8" \
-	XMAGE_DOCKER_MAX_PASSWORD_LENGTH="100" \
-	XMAGE_DOCKER_MAILGUN_API_KEY="X" \
-	XMAGE_DOCKER_MAILGUN_DOMAIN="X" \
+    XMAGE_DOCKER_ADMIN_PASSWORD="hunter2" \
+    XMAGE_DOCKER_MAX_GAME_THREADS="10" \
+    XMAGE_DOCKER_MIN_USERNAME_LENGTH="3" \
+    XMAGE_DOCKER_MAX_USERNAME_LENGTH="14" \
+    XMAGE_DOCKER_MIN_PASSWORD_LENGTH="8" \
+    XMAGE_DOCKER_MAX_PASSWORD_LENGTH="100" \
+    XMAGE_DOCKER_MAILGUN_API_KEY="X" \
+    XMAGE_DOCKER_MAILGUN_DOMAIN="X" \
     XMAGE_DOCKER_SERVER_MSG="Hello! \nWelcome to $XMAGE_DOCKER_SERVER_NAME" \
     XMAGE_DOCKER_MADBOT_ENABLED=0
 
-#RUN based on anapsix/docker-alpine-java:8u172b11_server-jre
-RUN set -ex && \
-    apk -U upgrade && \
-    apk add curl ca-certificates bash jq 
- 
-#Following code based on Dockerfile from goesta/docker-xmage-alpine 
+#Build and Configure Container
 WORKDIR /xmage
 
-RUN curl --silent --show-error http://xmage.de/xmage/config.json | jq '.XMage.location' | xargs curl -# -L > xmage.zip \
- && unzip xmage.zip -x "mage-client*" \
- && rm xmage.zip \
- && apk del curl jq
+RUN set -ex && \
+    apk -U upgrade && \
+    apk add curl ca-certificates jq && \ 
+    curl --silent --show-error http://xmage.de/xmage/config.json | jq '.XMage.location' | xargs curl -# -L > xmage.zip \
+    && unzip xmage.zip -x "mage-client*" \
+    && rm xmage.zip \
+    && apk del curl jq
 
 COPY dockerStartServer.sh /xmage/mage-server/
 
