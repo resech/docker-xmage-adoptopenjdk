@@ -42,7 +42,7 @@ You should always set `XMAGE_DOCKER_SERVER_ADDRESS` to the same value as your `-
 + XMAGE_DOCKER_MAX_PASSWORD_LENGTH="100"
 + XMAGE_DOCKER_MAILGUN_API_KEY="X"
 + XMAGE_DOCKER_MAILGUN_DOMAIN="X"
-+ XMAGE_DOCKER_SERVER_MSG="Hello! \nWelcome to $XMAGE_DOCKER_SERVER_NAME"
++ XMAGE_DOCKER_SERVER_MSG=""
 + XMAGE_DOCKER_MADBOT_ENABLED=0
 
 ---
@@ -61,6 +61,8 @@ You should **ALWAYS** change the admin password, you can do that with the `XMAGE
 
 `JAVA_EXTENDED_OPTIONS` can get you in trouble so don't change it unless you know what you are doing. With that said, I've noticed better performance using the G1 Garbage Collector instead of the default CMS collector. Here's how I have the collector setup (assuming a `JAVA_MAX_MEMORY` of 2G): `"JAVA_EXTENDED_OPTIONS=-XX:+UseG1GC -XX:+UseStringDeduplication -XX:G1HeapRegionSize=1m"`. 
 
+`XMAGE_DOCKER_SERVER_MSG` can be used to customise the contents of `server.msg.txt`. This setting actually clobbers the default file so you'll have to recreate it in the variable if you only want to add to the contents. You can use `\n` to add newlines, each line is a message. For example, this would create 3 lines in `server.msg.txt`: `"XMAGE_DOCKER_SERVER_MSG=This is line 1 \nThis is line 2 \nThis is line 3"`. By default we'll just use the original file without modification. 
+
 So an advanced Docker Run Configuration with the G1 Garbage Collector and AI enabled would look like this:
 ```
 docker run -d -it --rm \
@@ -73,7 +75,7 @@ docker run -d -it --rm \
     -e "JAVA_MIN_MEMORY=256M" \
     -e "JAVA_MAX_MEMORY=2G" \
     -e "JAVA_EXTENDED_OPTIONS=-XX:+UseG1GC -XX:+UseStringDeduplication -XX:G1HeapRegionSize=1m" \
-    -e "XMAGE_DOCKER_SERVER_MSG=resech's XMage Server" \
+    -e "XMAGE_DOCKER_SERVER_MSG=resech's XMage Server \nHave fun." \
     -e "XMAGE_DOCKER_MADBOT_ENABLED=1" \
     --mount source=xmage-db,target=/xmage/mage-server/db \
     resech/docker-xmage-adoptopenjdk
