@@ -61,7 +61,7 @@ You should **ALWAYS** change the admin password, you can do that with the `XMAGE
 
 `JAVA_EXTENDED_OPTIONS` can get you in trouble so don't change it unless you know what you are doing. With that said, I've noticed better performance using the G1 Garbage Collector instead of the default CMS collector. Here's how I have the collector setup (assuming a `JAVA_MAX_MEMORY` of 2G): `"JAVA_EXTENDED_OPTIONS=-XX:+UseG1GC -XX:+UseStringDeduplication -XX:G1HeapRegionSize=1m"`. 
 
-`XMAGE_DOCKER_SERVER_MSG` can be used to customise the contents of `server.msg.txt`. This setting actually clobbers the default file so you'll either have to recreate it in the variable if you only want to add to the contents. You can use `\n` to add newlines, each line is a message. For example, this would create 3 lines in `server.msg.txt`: `"XMAGE_DOCKER_SERVER_MSG=This is line 1 \nThis is line 2 \nThis is line 3"`. By default we'll just use the original file without modification. 
+`XMAGE_DOCKER_SERVER_MSG` can be used to customise the contents of `server.msg.txt`. This setting actually clobbers the default file so you'll have to recreate it in the variable if you only want to add to the contents. You can use `\n` to add newlines, each line is a message. For example, this would create 3 lines in `server.msg.txt`: `"XMAGE_DOCKER_SERVER_MSG=This is line 1 \nThis is line 2 \nThis is line 3"`. By default we'll just use the original file without modification. 
 
 So an advanced Docker Run Configuration with the G1 Garbage Collector and AI enabled would look like this:
 ```
