@@ -23,19 +23,19 @@ ENV JAVA_MIN_MEMORY=256M \
     XMAGE_DOCKER_MAX_PASSWORD_LENGTH="100" \
     XMAGE_DOCKER_MAILGUN_API_KEY="X" \
     XMAGE_DOCKER_MAILGUN_DOMAIN="X" \
-    XMAGE_DOCKER_SERVER_MSG="Hello! \nWelcome to $XMAGE_DOCKER_SERVER_NAME" \
+    XMAGE_DOCKER_SERVER_MSG="" \
     XMAGE_DOCKER_MADBOT_ENABLED=0
 
 #Build and Configure Container
 WORKDIR /xmage
 
 RUN set -ex && \
-    apk -U upgrade && \
-    apk add curl ca-certificates jq && \ 
+    apk --no-cache -U upgrade && \
+    apk --no-cache add curl ca-certificates jq && \ 
     curl --silent --show-error http://xmage.de/xmage/config.json | jq '.XMage.location' | xargs curl -# -L > xmage.zip \
     && unzip xmage.zip -x "mage-client*" \
     && rm xmage.zip \
-    && apk del curl jq
+    && apk del curl jq 
 
 COPY dockerStartServer.sh /xmage/mage-server/
 
