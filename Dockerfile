@@ -34,8 +34,8 @@ RUN set -ex && \
     apk --no-cache add curl ca-certificates jq && \ 
     curl --silent --show-error http://xmage.de/xmage/config.json | jq '.XMage.location' | xargs curl -# -L > xmage.zip \
     && unzip xmage.zip -x "mage-client*" \
-    && rm xmage.zip \
-    && apk del curl jq 
+    && apk del --purge curl jq \
+    && rm -rf xmage.zip /var/cache/apk/*
 
 COPY dockerStartServer.sh /xmage/mage-server/
 
