@@ -10,7 +10,6 @@ docker run -d -it --rm \
     -p 17179:17179 \
     --add-host example.com:0.0.0.0 \
     -e "XMAGE_DOCKER_SERVER_ADDRESS=example.com" \
-    --restart unless-stopped \
     resech/docker-xmage-adoptopenjdk
 ```
 
