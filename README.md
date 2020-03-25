@@ -1,3 +1,5 @@
+![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/resech/docker-xmage-adoptopenjdk?style=plastic) ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/resech/docker-xmage-adoptopenjdk?style=plastic) ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/resech/docker-xmage-adoptopenjdk/latest?style=plastic)
+
 # XMage Server based on Alpine & AdoptOpenJDK
 
 Based heavily on the work done by [LunarNightShade](https://github.com/LunarNightShade/docker-xmage-openjdk). I've updated the base image to use the AdoptOpenJDK nightly builds and added a few more configuration variables.
