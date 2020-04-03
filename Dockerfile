@@ -29,19 +29,19 @@ ENV JAVA_MIN_MEMORY=256M \
 #Build and Configure Container
 WORKDIR /xmage
 
+COPY dockerStartServer.sh /xmage/
+
 RUN set -ex && \
     apk --no-cache -U upgrade && \
     apk --no-cache add curl ca-certificates jq && \ 
     curl --silent --show-error http://xmage.de/xmage/config.json | jq '.XMage.location' | xargs curl -# -L > xmage.zip \
     && unzip xmage.zip -x "mage-client*" \
-    && apk del --purge curl jq \
-    && rm -rf xmage.zip /var/cache/apk/*
-
-COPY dockerStartServer.sh /xmage/mage-server/
-
-RUN chmod +x \
+    && mv /xmage/dockerStartServer.sh /xmage/mage-server/ \
+    && chmod +x \
     /xmage/mage-server/startServer.sh \
-    /xmage/mage-server/dockerStartServer.sh
+    /xmage/mage-server/dockerStartServer.sh \
+    && apk del --purge curl jq \
+    && rm -rf xmage.zip /var/cache/apk/* /xmage/mage-server/startMage*.bat
 
 EXPOSE $XMAGE_DOCKER_PORT $XMAGE_DOCKER_SEONDARY_BIND_PORT
 
